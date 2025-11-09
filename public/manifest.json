@@ -2,6 +2,12 @@
     "manifest_version": 3,
     "version": "1.0.0",
     "name":"Pomodoro Pal",
+    "web_accessible_resources":[
+        {
+            "resources":["Pomodoro_Pal_Typing.gif"],
+            "matches":["<all_urls>"]
+        }
+    ],
     "action":{
         "default_popup":"index.html"
     },

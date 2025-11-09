@@ -21,7 +21,18 @@ function App() {
           func: ()=>{
             alert('Hello from my extension!')
 
-            document.body.style.backgroundColor = 'red'
+            // anchor gif to the bottom right
+            let pomodoroPal = document.createElement('img')
+            pomodoroPal.src = chrome.runtime.getURL('Pomodoro_Pal_Typing.gif')
+
+            pomodoroPal.style.height = '100px'
+            pomodoroPal.style.width = '100px'
+            pomodoroPal.style.position = 'fixed'
+            pomodoroPal.style.right = '0'
+            pomodoroPal.style.bottom = '0'
+            pomodoroPal.style.zIndex = '1001'
+                        
+            document.body.appendChild(pomodoroPal)
           }
         })
       }
