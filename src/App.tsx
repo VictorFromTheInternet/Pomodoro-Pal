@@ -1,37 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import { useState } from 'react'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+function App() {  
 
   const handleBtnClick = async () =>{
-    let [tab] = await chrome.tabs.query({active:true})
+    let [tab] = await chrome.tabs.query({active:true})    
+
+    try{
+      // check if the page is a chrome page
+      if (!tab || !tab.url || tab.url.includes('chrome://') ){
+        console.log('can`t run on chrome start page')
+      }
+      else{
+
+        // execute script
+        chrome.scripting.executeScript({
+          target: {tabId: tab.id!},
+          func: ()=>{
+            alert('Hello from my extension!')
+
+            document.body.style.backgroundColor = 'red'
+          }
+        })
+      }
+      
+    }
+    catch(err){
+      console.error("An error occured: ", err)
+    }
+    
   }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+    <>          
+      <h1>Pomodoro Pal</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <button onClick={handleBtnClick}>
+          Hello World!
+        </button>                
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      
     </>
   )
 }
