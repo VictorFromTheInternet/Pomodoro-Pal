@@ -4,6 +4,19 @@
     "name":"Pomodoro Pal",
     "action":{
         "default_popup":"index.html"
+    },
+    "permissions":[
+        "scripting"
+    ],
+    "host_permissions":[
+        "http://*/*",
+        "https://*/*"
+    ],
+    "icons":{
+        "16":"Pomodoro_Pal_16.png",
+        "32":"Pomodoro_Pal_32.png",
+        "48":"Pomodoro_Pal_48.png",
+        "128":"Pomodoro_Pal_128.png"        
     }
 
 }

@@ -6,6 +6,10 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
+  const handleBtnClick = async () =>{
+    let [tab] = await chrome.tabs.query({active:true})
+  }
+
   return (
     <>
       <div>
