@@ -6,48 +6,48 @@ function App() {
   const [form, setForm] = useState({
     work: 15,
     break: 5,
-    blocks: 2,
-    workTime: true
+    blocks: 2
   });
 
   const [showPal, setShowPal] = useState(false)
-  const [currentGif, setCurrentGif] = useState('Pomodoro_Pal_Typing.gif')    
+  const [isRunning, setIsRunning] = useState(false)
 
-  // const decrementTimer = async()=>{
-
-  // }
-
-
-  const handleBtnClick = async () =>{
-    let [tab] = await chrome.tabs.query({active:true})    
-
-    try{
-      // check if the page is a chrome page
-      if (!tab || !tab.url || tab.url.includes('chrome://') ){
-        console.log('can`t run on chrome start page')
-        return
-      }
-
-
-      // send message to content script
-      if(tab.id){        
-
-        // execute content script
-        chrome.tabs.sendMessage(tab.id, {
-          action: 'showPal',
-          gifPath: currentGif
-        })
-
-        // update local state
-        setShowPal(true)
-        setCurrentGif('Pomodoro_Pal_Typing.gif')
-      }
-      
+  const handleStartClick = async () => {
+    try {
+      // Send configuration to service worker
+      chrome.runtime.sendMessage({
+        action: 'startTimer',
+        config: {
+          work: form.work,
+          break: form.break,
+          blocks: form.blocks
+        }
+      }, (response: any) => {
+        if (response?.success) {
+          console.log('Timer started successfully');
+          setIsRunning(true);
+          setShowPal(true);
+        }
+      });
+    } catch (err) {
+      console.error("An error occurred: ", err);
     }
-    catch(err){
-      console.error("An error occured: ", err)
+  }
+
+  const handleStopClick = async () => {
+    try {
+      chrome.runtime.sendMessage({
+        action: 'stopTimer'
+      }, (response: any) => {
+        if (response?.success) {
+          console.log('Timer stopped successfully');
+          setIsRunning(false);
+          setShowPal(false);
+        }
+      });
+    } catch (err) {
+      console.error("An error occurred: ", err);
     }
-    
   }
 
   return (
@@ -85,12 +85,18 @@ function App() {
                   })}} />
         </div>
 
-        <button onClick={handleBtnClick}>
-          START
-        </button>                
+        {!isRunning ? (
+          <button onClick={handleStartClick}>
+            START
+          </button>
+        ) : (
+          <button onClick={handleStopClick} className="stop-button">
+            STOP
+          </button>
+        )}
       </div>
       
-      {showPal && <PomodoroPal gifPath={currentGif} />}
+      {showPal && <PomodoroPal gifPath="Pomodoro_Pal_Typing.gif" />}
     </>
   )
 }

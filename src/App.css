@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+
+.stop-button {
+  background-color: #ff4444;
+  color: white;
+}
+
+.stop-button:hover {
+  background-color: #cc0000;
+}
