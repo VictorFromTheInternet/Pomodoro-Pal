@@ -2,27 +2,33 @@
     "manifest_version": 3,
     "version": "1.0.0",
     "name":"Pomodoro Pal",
-    "web_accessible_resources":[
-        {
-            "resources":["Pomodoro_Pal_Typing.gif"],
-            "matches":["<all_urls>"]
-        }
-    ],
-    "action":{
-        "default_popup":"index.html"
-    },
-    "permissions":[
-        "scripting"
-    ],
-    "host_permissions":[
-        "http://*/*",
-        "https://*/*"
-    ],
+    "description":"a interval pomodoro timer for productivity",
     "icons":{
         "16":"Pomodoro_Pal_16.png",
         "32":"Pomodoro_Pal_32.png",
         "48":"Pomodoro_Pal_48.png",
         "128":"Pomodoro_Pal_128.png"        
-    }
+    },
+    "action":{
+        "default_popup":"index.html"
+    },
+    "content_scripts":[{
+        "matches": ["<all_urls>"],
+        "js":["content.js"],
+        "run_at":"document_end"
+    }],
+    "permissions":[
+        "scripting",
+        "tabs",
+        "activeTab"
+    ],
+    "host_permissions":[
+        "http://*/*",
+        "https://*/*"
+    ],
+    "web_accessible_resources":[{
+        "resources": ["*.gif", "Pomodoro_Pal_Typing.gif"],
+        "matches": ["<all_urls>"]
+    }]
 
 }

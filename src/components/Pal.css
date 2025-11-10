@@ -1,0 +1,8 @@
+.pomodoro-pal{
+    height: 10vh;
+    width: 10vh;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+}
