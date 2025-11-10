@@ -10,7 +10,7 @@
         "128":"Pomodoro_Pal_128.png"        
     },
     "action":{
-        "default_popup":"index.html"
+        "default_popup":"popup.html"
     },
     "background": {
         "service_worker": "background.js"
@@ -31,7 +31,7 @@
         "https://*/*"
     ],
     "web_accessible_resources":[{
-        "resources": ["*.gif", "Pomodoro_Pal_Typing.gif"],
+        "resources": ["*.gif", "*.png"],
         "matches": ["<all_urls>"]
     }]
 

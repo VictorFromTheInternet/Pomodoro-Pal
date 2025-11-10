@@ -1,18 +1,7 @@
 // Service worker for background timer logic
 console.log('Pomodoro Pal service worker loaded!');
 
-interface PomodoroState {
-  isRunning: boolean;
-  currentPhase: 'work' | 'break';
-  timeRemaining: number; // in seconds
-  workDuration: number;
-  breakDuration: number;
-  blocksRemaining: number;
-  totalBlocks: number;
-  currentGif: string;
-}
-
-let pomodoroState: PomodoroState = {
+let pomodoroState = {
   isRunning: false,
   currentPhase: 'work',
   timeRemaining: 0,
@@ -23,10 +12,10 @@ let pomodoroState: PomodoroState = {
   currentGif: 'Pomodoro_Pal_Typing.gif'
 };
 
-let timerInterval: number | null = null;
+let timerInterval = null;
 
 // Listen for messages from popup
-chrome.runtime.onMessage.addListener((message: any, _sender: any, sendResponse: any) => {
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   console.log('Service worker received message:', message);
 
   switch (message.action) {
@@ -51,7 +40,7 @@ chrome.runtime.onMessage.addListener((message: any, _sender: any, sendResponse: 
   return true; // Keep channel open for async response
 });
 
-function startTimer(config: { work: number; break: number; blocks: number }) {
+function startTimer(config) {
   console.log('Starting timer with config:', config);
 
   // Initialize state
@@ -77,7 +66,7 @@ function startTimer(config: { work: number; break: number; blocks: number }) {
   // Start countdown
   timerInterval = setInterval(() => {
     decrementTimer();
-  }, 1000) as unknown as number;
+  }, 1000);
 }
 
 // Helper function to ensure content script is loaded before sending message
@@ -135,7 +124,7 @@ function stopTimer() {
   chrome.action.setBadgeText({ text: '' });
 
   // Hide GIF on all tabs
-  chrome.tabs.query({}, (tabs: any[]) => {
+  chrome.tabs.query({}, (tabs) => {
     tabs.forEach((tab) => {
       if (tab.id && tab.url && !tab.url.includes('chrome://')) {
         chrome.tabs.sendMessage(tab.id, {
@@ -220,7 +209,7 @@ function handlePhaseComplete() {
 }
 
 function updateContentScript() {
-  chrome.tabs.query({ active: true, currentWindow: true }, async (tabs: any[]) => {
+  chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
     const activeTab = tabs[0];
     if (activeTab?.id && activeTab.url && !activeTab.url.includes('chrome://')) {
       try {
@@ -229,7 +218,7 @@ function updateContentScript() {
           action: 'showPal',
           gifPath: pomodoroState.currentGif
         });
-      } catch (error: any) {
+      } catch (error) {
         // If content script not loaded, inject it first
         console.log('Content script not loaded, injecting...', error);
         try {
@@ -241,7 +230,7 @@ function updateContentScript() {
           // Wait a bit for script to load, then try again
           setTimeout(async () => {
             try {
-              await chrome.tabs.sendMessage(activeTab.id!, {
+              await chrome.tabs.sendMessage(activeTab.id, {
                 action: 'showPal',
                 gifPath: pomodoroState.currentGif
               });
@@ -250,7 +239,7 @@ function updateContentScript() {
             }
           }, 100);
         } catch (injectError) {
-          console.log('Failed to inject content script:', injectError);
+          console.error('Failed to inject content script:', injectError);
         }
       }
     }

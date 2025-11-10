@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Pal</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="app">
+    <h1>Pomodoro Pal</h1>
+    <div class="card">
+      <div class="form-group">
+        <label for="work">Work:</label>
+        <input type="number" name="work" id="work" value="15" min="1">
+      </div>
+
+      <div class="form-group">
+        <label for="break">Break:</label>
+        <input type="number" name="break" id="break" value="5" min="1">
+      </div>
+
+      <div class="form-group">
+        <label for="blocks">Blocks:</label>
+        <input type="number" name="blocks" id="blocks" value="2" min="1">
+      </div>
+
+      <button id="startBtn" class="primary-button">START</button>
+      <button id="stopBtn" class="stop-button" style="display: none;">STOP</button>
+    </div>
+
+    <div id="palContainer" style="display: none;">
+      <img id="palImage" class="pomodoroPal" alt="Pomodoro Pal" />
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
