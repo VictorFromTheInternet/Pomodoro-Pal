@@ -1,39 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pomodoro Pal</title>
-  <link rel="stylesheet" href="popup.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Pal</title>
+    <link rel="stylesheet" href="popup.css">
+
+    <script src="popup.js" defer></script>
 </head>
+
 <body>
-  <div id="app">
-    <h1>Pomodoro Pal</h1>
-    <div class="card">
-      <div class="form-group">
-        <label for="work">Work:</label>
-        <input type="number" name="work" id="work" value="15" min="1">
-      </div>
+    <div id="app">
+        <h1>Pomodoro Pal</h1>
 
-      <div class="form-group">
-        <label for="break">Break:</label>
-        <input type="number" name="break" id="break" value="5" min="1">
-      </div>
+        <!-- start card -->
+        <div id="card-start" class="card" style="display: block;">
+            <div class="form-group">
+                <label for="work">Work:</label>
+                <input type="number" name="work" id="work" value="15" min="1">
+            </div>
 
-      <div class="form-group">
-        <label for="blocks">Blocks:</label>
-        <input type="number" name="blocks" id="blocks" value="2" min="1">
-      </div>
+            <div class="form-group">
+                <label for="break">Break:</label>
+                <input type="number" name="break" id="break" value="5" min="1">
+            </div>
 
-      <button id="startBtn" class="primary-button">START</button>
-      <button id="stopBtn" class="stop-button" style="display: none;">STOP</button>
+            <div class="form-group">
+                <label for="blocks">Blocks:</label>
+                <input type="number" name="blocks" id="blocks" value="2" min="1">
+            </div>            
+
+            <button id="startBtn" class="primary-button">START</button>            
+        </div>
+
+        <!-- card timer -->
+        <div id="card-timer" class="card" style="display: none;">
+            <h3 id="title-work" style="display: none;">Work</h3>
+            <h3 id="title-break" style="display: none;">Break</h3>
+            <div class="form-group">
+                <label for="">Timer:</label>
+                <input type="text" name="timer" id="timer" value="0" min="0">
+            </div>            
+            <p>Block: <span id="block-num"></span> of <span id="block-total"></span></p>
+
+            <button id="stopBtn" class="stop-button" >STOP</button>
+        </div>
+    
     </div>
-
-    <div id="palContainer" style="display: none;">
-      <img id="palImage" class="pomodoroPal" alt="Pomodoro Pal" />
-    </div>
-  </div>
-
-  <script src="popup.js"></script>
+    
 </body>
+
 </html>
