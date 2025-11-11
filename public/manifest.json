@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "version": "1.0.0",
     "name":"Pomodoro Pal",
-    "description":"a interval pomodoro timer for productivity",
+    "description":"An easy to use interval timer for productivity!",
     "icons":{
         "16":"Pomodoro_Pal_16.png",
         "32":"Pomodoro_Pal_32.png",
