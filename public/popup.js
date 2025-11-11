@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
             const minutes = Math.floor(state.timeRemaining / 60)
             const seconds = state.timeRemaining % 60
-            timerDisplay.value = `${minutes}:${seconds.toString().padStart(2, '0')}`
+            timerDisplay.innerText = `${minutes}:${seconds.toString().padStart(2, '0')}`
 
             blockNum.innerText = (state.totalBlocks - state.blocksRemaining)+1
             blockTotal.innerText = state.totalBlocks

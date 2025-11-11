@@ -279,7 +279,7 @@ function updateBadge() {
 
     chrome.action.setBadgeText({ text: badgeText });
     chrome.action.setBadgeBackgroundColor({
-        color: pomodoroState.currentPhase === 'work' ? '#FF6B6B' : '#4ECDC4'
+        color: pomodoroState.currentPhase === 'work' ? '#FF6B6B' : '#0288d1'
     });
 }
 

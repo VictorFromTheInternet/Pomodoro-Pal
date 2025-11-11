@@ -31,11 +31,9 @@ function showPal(gifPath) {
             position: fixed;
             bottom: 0px;
             right: 0px;
-            z-index: 999999;
-            background: rgba(0, 0, 0, 0.25);
+            z-index: 999999;            
             padding: 0px;
-            border-radius: 4px 0 0 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border-radius: 4px 0 0 0;            
             `;
 
         palImage = document.createElement("img");
